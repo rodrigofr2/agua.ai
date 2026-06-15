@@ -9,6 +9,7 @@ import { sectionATitle, sectionAIntro, sectionAPages } from './content/pt/sectio
 import { sectionCTitle, sectionCIntro, sectionCTabs } from './content/pt/sectionC';
 import { quizTitle, quizIntro } from './content/pt/quiz';
 import { aboutTitle, aboutIntro, aboutValues, aboutInstitution } from './content/pt/about';
+import ContactButton from './components/contact/ContactButton';
 import './theme/tokens.css';
 import './theme/motifs.css';
 import './theme/globals.css';
@@ -82,6 +83,8 @@ export default function App() {
         </div>
         <div className="motif-waves" />
       </SectionShell>
+
+      <ContactButton></ContactButton>
 
       <div className="motif-bubbles" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         {Array.from({ length: 8 }).map((_, i) => (

@@ -1,0 +1,80 @@
+.wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.fab {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary, #2563eb);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
+}
+
+.fab:active {
+  transform: scale(0.96);
+}
+
+.fabOpen {
+  background-color: var(--color-primary-dark, #1d4ed8);
+}
+
+.formCard {
+  width: 320px;
+  border-radius: 14px;
+  background: var(--color-surface, #ffffff);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  animation: slideUp 0.22s ease;
+  border: 1px solid var(--color-border, #e5e7eb);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 400px) {
+  .wrapper {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .formCard {
+    width: calc(100vw - 2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formCard {
+    animation: none;
+  }
+  .fab {
+    transition: none;
+  }
+}
