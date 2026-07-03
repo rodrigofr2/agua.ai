@@ -5,25 +5,6 @@ interface ContactFormProps {
   onClose: () => void
 }
 
-// Lista de palavrões em pt-BR, para evitar mensagens de baixo nivel
-const PROFANITY = [
-  'arrombado', 'babaca', 'bicha', 'boquete', 'bosta', 'buceta',
-  'cabaço', 'cabaco', 'cacete', 'canalha', 'caralho', 'corno', 'cu',
-  'desgraça', 'escroto', 'fdp', 'filho da puta', 'foda', 'foda-se', 'fodase',
-  'idiota', 'imbecil', 'inferno', 'krl', 'lixo', 'macaco', 'merda', 'mongol',
-  'otario', 'otário', 'pica', 'pika', 'piroca', 'pnc', 'porra', 'pqp', 'punheta',
-  'puta', 'putaria', 'rapariga', 'retardado', 'rola', 'sapatao', 'sapatão', 'sifude',
-  'siririca', 'tnc', 'tomanocu', 'traveco', 'vadia', 'vai se foder', 'viadinho',
-  'viado', 'vsf', 'vtc', 'vtnc', 'xoxota'
-];
-
-function containsProfanity(text: string): boolean {
-  const normalized = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  return PROFANITY.some(word => {
-    const w = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    return new RegExp(`\\b${w}\\b`).test(normalized)
-  })
-}
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
@@ -51,15 +32,13 @@ export default function ContactForm({ onClose }: ContactFormProps) {
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitted, setSubmitted] = useState(false)
 
-  const TEAM_EMAIL = 'equipe.aguaai@outlook.com' 
+  const TEAM_EMAIL = 'equipe@agua.ai' // troque pelo email da equipe
 
   function validate(): FieldErrors {
     const e: FieldErrors = {}
 
     if (!name.trim()) {
       e.name = 'Informe seu nome ou nick.'
-    } else if (containsProfanity(name)) {
-      e.name = 'Por favor, use um nome adequado.'
     }
 
     if (!contact.trim()) {
@@ -70,8 +49,6 @@ export default function ContactForm({ onClose }: ContactFormProps) {
 
     if (!message.trim()) {
       e.message = 'Escreva sua mensagem.'
-    } else if (containsProfanity(message)) {
-      e.message = 'Por favor, mantenha a mensagem respeitosa.'
     } else if (message.trim().length < 10) {
       e.message = 'Mensagem muito curta. Descreva melhor como podemos ajudar.'
     }
